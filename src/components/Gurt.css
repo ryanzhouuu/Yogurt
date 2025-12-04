@@ -1,0 +1,192 @@
+.gurt-container {
+  position: absolute;
+  bottom: 5vh;
+  left: 50%;
+  width: 150px;
+  z-index: 10;
+  opacity: 0;
+  transform: translateX(-50%) translateY(50px) scale(0.8);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  pointer-events: none;
+  cursor: pointer;
+}
+
+.gurt-container.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+  pointer-events: auto;
+  animation: gurtWiggle 0.9s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.gurt-container:focus {
+  outline: 3px solid rgba(255, 107, 157, 0.5);
+  outline-offset: 5px;
+  border-radius: 20px;
+}
+
+.gurt-body {
+  width: 150px;
+  height: 180px;
+  background: white;
+  border: 4px solid #bbb;
+  border-radius: 22px 22px 12px 12px;
+  position: relative;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.gurt-lid {
+  position: absolute;
+  top: -12px;
+  left: 8px;
+  right: 8px;
+  height: 24px;
+  background-color: #f8c1d8;
+  border: 4px solid #bbb;
+  border-bottom: none;
+  border-radius: 12px 12px 3px 3px;
+}
+
+.gurt-arm {
+  position: absolute;
+  width: 22px;
+  height: 60px;
+  background: white;
+  border: 4px solid #bbb;
+  border-radius: 15px;
+  top: 45px;
+  z-index: -1;
+}
+
+.gurt-arm.left {
+  left: -15px;
+  transform: rotate(-30deg);
+}
+
+.gurt-arm.right {
+  right: -15px;
+  transform: rotate(30deg);
+}
+
+.gurt-face {
+  position: absolute;
+  top: 45px;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 8px;
+}
+
+.gurt-eyes-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.gurt-eye {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+  border-radius: 50%;
+  margin: 0 15px;
+  transform: scale(0);
+}
+
+.gurt-mouth {
+  width: 60px;
+  height: 30px;
+  background-color: #333;
+  border-radius: 0 0 30px 30px / 0 0 30px 30px;
+  transform: scaleY(0);
+  transform-origin: top center;
+}
+
+.gurt-nametag {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  border: 2px solid #cccccc;
+  border-radius: 8px;
+  padding: 3px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.speech-bubble {
+  position: absolute;
+  bottom: 200px;
+  left: 50%;
+  background-color: #c1e1f8;
+  color: #2a526b;
+  padding: 15px 30px;
+  border-radius: 30px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  opacity: 0;
+  transform-origin: bottom center;
+  transform: translateX(-50%);
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #c1e1f8;
+}
+
+/* Animations */
+.gurt-container.visible .speech-bubble {
+  animation: bubblePop 0.5s 0.1s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+.gurt-container.visible .gurt-eye {
+  animation: eyePop 0.3s 0.3s ease-out forwards;
+}
+
+.gurt-container.visible .gurt-mouth {
+  animation: mouthOpen 0.3s 0.35s ease-out forwards;
+}
+
+@keyframes gurtWiggle {
+  0% { transform: translateX(-50%) translateY(0) scale(1) rotate(0deg); }
+  20% { transform: translateX(-50%) translateY(-15px) scale(1.05) rotate(-5deg); }
+  40% { transform: translateX(-50%) translateY(5px) scale(0.98) rotate(5deg); }
+  60% { transform: translateX(-50%) translateY(-10px) scale(1.03) rotate(-3deg); }
+  80% { transform: translateX(-50%) translateY(2px) scale(0.99) rotate(3deg); }
+  100% { transform: translateX(-50%) translateY(0) scale(1) rotate(0deg); }
+}
+
+@keyframes bubblePop {
+  0% { opacity: 0; transform: translateX(-50%) scale(0.5); }
+  70% { opacity: 1; transform: translateX(-50%) scale(1.15); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+@keyframes eyePop {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+@keyframes mouthOpen {
+  0% { transform: scaleY(0); }
+  100% { transform: scaleY(1); }
+}
