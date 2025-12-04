@@ -1,67 +1,25 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useCallback } from 'react'
 import ParticleBackground from './components/ParticleBackground'
-import CenterBox from './components/CenterBox'
 import Gurt from './components/Gurt'
-import { useAudio } from './hooks/useAudio'
 import './App.css'
 
 function App() {
-  const [isGurtVisible, setIsGurtVisible] = useState(false)
-  const { playSillySound } = useAudio()
-  const hideTimerRef = useRef(null)
-
-  const showGurt = useCallback(() => {
-    playSillySound()
-    setIsGurtVisible(true)
-  }, [playSillySound])
-
-  // Auto-hide Gurt after 4 seconds when visible
-  useEffect(() => {
-    if (isGurtVisible) {
-      // Clear any existing timer
-      if (hideTimerRef.current) {
-        clearTimeout(hideTimerRef.current)
-      }
-      
-      // Set new timer
-      hideTimerRef.current = setTimeout(() => {
-        setIsGurtVisible(false)
-        hideTimerRef.current = null
-      }, 4000)
-
-      return () => {
-        if (hideTimerRef.current) {
-          clearTimeout(hideTimerRef.current)
-          hideTimerRef.current = null
-        }
-      }
-    }
-  }, [isGurtVisible])
+  const [showSpeechBubble, setShowSpeechBubble] = useState(false)
 
   const handleGurtInteract = useCallback(() => {
-    // When user clicks on Gurt, he says "Yo!" again
-    playSillySound()
+    // When user clicks on Gurt, show the speech bubble
+    setShowSpeechBubble(true)
     
-    // Reset animation by toggling visibility
-    setIsGurtVisible(false)
-    
-    // Clear existing timer
-    if (hideTimerRef.current) {
-      clearTimeout(hideTimerRef.current)
-      hideTimerRef.current = null
-    }
-    
-    // Force re-render after a brief moment and reset the timer
+    // Hide speech bubble after a moment
     setTimeout(() => {
-      setIsGurtVisible(true)
-    }, 50)
-  }, [playSillySound])
+      setShowSpeechBubble(false)
+    }, 2000)
+  }, [])
 
   return (
     <div className="app">
       <ParticleBackground />
-      <CenterBox onTriggerGurt={showGurt} />
-      <Gurt isVisible={isGurtVisible} onInteract={handleGurtInteract} />
+      <Gurt showSpeechBubble={showSpeechBubble} onInteract={handleGurtInteract} />
     </div>
   )
 }

@@ -1,24 +1,27 @@
-import { useEffect, useState } from 'react'
+import { useMemo } from 'react'
 import './ParticleBackground.css'
 
 /**
- * ParticleBackground - Creates animated floating particles
+ * ParticleBackground - Creates subtle animated floating particles
  */
 export default function ParticleBackground() {
-  const [particles] = useState(() => {
-    const particleCount = 30
-    return Array.from({ length: particleCount }, (_, i) => ({
-      id: i,
-      size: Math.random() * 30 + 10,
-      left: Math.random() * 100,
-      bottom: Math.random() * 20 - 20,
-      duration: Math.random() * 10 + 10,
-      delay: Math.random() * 10,
-      color: ['rgba(255, 107, 157, 0.2)', 'rgba(255, 255, 255, 0.5)', 'rgba(255, 142, 142, 0.3)'][
-        Math.floor(Math.random() * 3)
-      ],
-    }))
-  })
+  const particles = useMemo(
+    () => {
+      const particleCount = 20
+      return Array.from({ length: particleCount }, (_, i) => ({
+        id: i,
+        size: Math.random() * 20 + 8,
+        left: Math.random() * 100,
+        bottom: Math.random() * 20 - 20,
+        duration: Math.random() * 15 + 15,
+        delay: Math.random() * 10,
+        color: ['rgba(255, 182, 193, 0.15)', 'rgba(176, 224, 230, 0.15)', 'rgba(255, 255, 255, 0.3)'][
+          Math.floor(Math.random() * 3)
+        ],
+      }))
+    },
+    []
+  )
 
   return (
     <div className="yogurt-particles">
