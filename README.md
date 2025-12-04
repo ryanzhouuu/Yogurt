@@ -4,9 +4,9 @@ A fun React app featuring Gurt, a yogurt character that says "Yo!" when you inte
 
 ## Features
 
-- **Interactive Gurt Character**: Click on Gurt or type "yogurt" to make him appear and say "Yo!"
-- **Animated Particles**: Beautiful floating particles in the background
-- **Sound Effects**: Playful audio feedback when Gurt appears
+- **Interactive Gurt Character**: Click on Gurt to make him say "Yo!"
+- **Draggable**: Drag Gurt anywhere on the screen with your mouse
+- **Cool Animated Background**: Beautiful gradient background with floating particles and shapes
 - **Smooth Animations**: Wiggle animations and speech bubble effects
 - **Responsive Design**: Works on all screen sizes
 
@@ -49,31 +49,27 @@ npm run preview
 
 ## How to Use
 
-1. Type "yogurt" in the input field and press Enter or click "Taste the Yogurt"
-2. Gurt will appear at the bottom of the screen with a speech bubble saying "Yo!"
-3. Click on Gurt to make him say "Yo!" again
-4. Gurt will automatically disappear after 4 seconds
+1. Gurt appears on the page automatically
+2. Click on Gurt to make him say "Yo!" with a speech bubble
+3. Drag Gurt anywhere on the screen - click and drag to move him around
 
 ## Tech Stack
 
 - **React 18** - UI library
 - **Vite** - Build tool and dev server
-- **Web Audio API** - Sound effects
 - **CSS3** - Animations and styling
+- **GitHub Pages** - Hosting
 
 ## Project Structure
 
 ```
 src/
 ├── components/
-│   ├── Gurt.jsx          # Gurt character component
-│   ├── CenterBox.jsx     # Input form component
-│   └── ParticleBackground.jsx  # Animated particles
-├── hooks/
-│   └── useAudio.js       # Custom hook for audio
-├── App.jsx               # Main app component
-├── main.jsx              # Entry point
-└── index.css             # Global styles
+│   ├── Gurt.jsx              # Gurt character component
+│   └── ParticleBackground.jsx # Animated background
+├── App.jsx                    # Main app component
+├── main.jsx                   # Entry point
+└── index.css                  # Global styles
 ```
 
 ## License
